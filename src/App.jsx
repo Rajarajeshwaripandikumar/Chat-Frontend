@@ -16,15 +16,15 @@ const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const { theme } = useThemeStore();
 
-  // check authentication on initial load
+  // Check auth when the app loads
   useEffect(() => {
-    const fetchAuthStatus = async () => {
+    const fetchStatus = async () => {
       await checkAuth();
     };
-    fetchAuthStatus();
+    fetchStatus();
   }, [checkAuth]);
 
-  // show loader during auth check
+  // Loader while checking auth
   if (isCheckingAuth) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -33,26 +33,26 @@ const App = () => {
     );
   }
 
-  // protect routes that require login
+  // Protect profile and home pages
   const PrivateRoute = ({ element }) => {
     return authUser ? element : <Navigate to="/login" />;
   };
 
   return (
     <div data-theme={theme}>
-      {/* NAVBAR */}
+      {/* FIXED NAVBAR */}
       <Navbar />
 
-      {/* ALL PAGE CONTENT BELOW NAVBAR */}
-      <main className="pt-8 md:pt-12 px-4 md:px-0">
+      {/* ADD SPACING BELOW NAVBAR */}
+      <main className="pt-20 px-4 md:px-0 min-h-screen">
         <Routes>
-          {/* Home Route */}
+          {/* Home */}
           <Route
             path="/"
             element={authUser ? <HomePage /> : <Navigate to="/login" />}
           />
 
-          {/* Public Routes */}
+          {/* Auth Routes */}
           <Route
             path="/signup"
             element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
@@ -62,10 +62,10 @@ const App = () => {
             element={!authUser ? <LoginPage /> : <Navigate to="/" />}
           />
 
-          {/* Settings (open to all or change to private if needed) */}
+          {/* Settings (public or private based on your preference) */}
           <Route path="/settings" element={<SettingsPage />} />
 
-          {/* Private Routes */}
+          {/* Private */}
           <Route
             path="/profile"
             element={<PrivateRoute element={<ProfilePage />} />}
