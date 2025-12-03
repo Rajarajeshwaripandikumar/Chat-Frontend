@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { useAuthStore } from "../store/useAuthStore";
-import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from "lucide-react";
 import { Link } from "react-router-dom";
-import AuthImagePattern from "../components/AuthImagePattern";
+import {
+  Eye,
+  EyeOff,
+  Loader2,
+  Lock,
+  Mail,
+  MessageSquare,
+  User,
+} from "lucide-react";
 import toast from "react-hot-toast";
+
+import { useAuthStore } from "../store/useAuthStore";
+import AuthImagePattern from "../components/AuthImagePattern";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,152 +38,152 @@ const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const success = validateForm();
-    if (success === true) signup(formData);
+    const ok = validateForm();
+    if (ok === true) signup(formData);
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-base-100 flex items-center">
-      {/* this container width & padding should match your header container */}
-      <div className="max-w-5xl mx-auto w-full px-6 sm:px-12">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* left side */}
-          <div className="flex justify-center">
-            <div className="w-full max-w-md space-y-8">
-              {/* LOGO / heading */}
-              <div className="text-center mb-4">
-                <div className="flex flex-col items-center gap-3 group">
-                  <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <MessageSquare className="size-6 text-primary" />
-                  </div>
-                  <h1 className="text-2xl sm:text-3xl font-bold mt-1 text-base-content">
-                    Create Account
-                  </h1>
-                  <p className="text-sm text-base-content/60">
-                    Get started with your free account
-                  </p>
+    <div className="min-h-screen bg-base-100">
+      {/* main content area under header */}
+      <main className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 px-6 sm:px-10 lg:px-16 py-10 lg:py-16">
+        {/* LEFT – form */}
+        <div className="flex items-center">
+          <div className="w-full max-w-md space-y-8">
+            {/* LOGO / heading */}
+            <div className="text-center mb-2">
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <MessageSquare className="size-6 text-primary" />
                 </div>
-              </div>
-
-              {/* form */}
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Full Name */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text font-medium text-base-content">
-                      Full Name
-                    </span>
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User className="size-5 text-base-content/40" />
-                    </div>
-                    <input
-                      type="text"
-                      className="input input-bordered w-full pl-10"
-                      placeholder="John Doe"
-                      value={formData.fullName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, fullName: e.target.value })
-                      }
-                    />
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text font-medium text-base-content">
-                      Email
-                    </span>
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Mail className="size-5 text-base-content/40" />
-                    </div>
-                    <input
-                      type="email"
-                      className="input input-bordered w-full pl-10"
-                      placeholder="you@example.com"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                    />
-                  </div>
-                </div>
-
-                {/* Password */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text font-medium text-base-content">
-                      Password
-                    </span>
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="size-5 text-base-content/40" />
-                    </div>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="input input-bordered w-full pl-10 pr-10"
-                      placeholder="••••••••"
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
-                    />
-                    <button
-                      type="button"
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                      onClick={() => setShowPassword(!showPassword)}
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                    >
-                      {showPassword ? (
-                        <EyeOff className="size-5 text-base-content/40" />
-                      ) : (
-                        <Eye className="size-5 text-base-content/40" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  className="btn btn-primary w-full"
-                  disabled={isSigningUp}
-                >
-                  {isSigningUp ? (
-                    <>
-                      <Loader2 className="size-5 animate-spin" />
-                      Loading...
-                    </>
-                  ) : (
-                    "Create Account"
-                  )}
-                </button>
-              </form>
-
-              {/* footer link */}
-              <div className="text-center">
+                <h1 className="text-2xl sm:text-3xl font-bold mt-1 text-base-content">
+                  Create Account
+                </h1>
                 <p className="text-sm text-base-content/60">
-                  Already have an account?{" "}
-                  <Link to="/login" className="link link-primary">
-                    Sign in
-                  </Link>
+                  Get started with your free account
                 </p>
               </div>
             </div>
-          </div>
 
-          {/* right side */}
+            {/* form */}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Full Name */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base-content">
+                    Full Name
+                  </span>
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type="text"
+                    className="input input-bordered w-full pl-10"
+                    placeholder="John Doe"
+                    value={formData.fullName}
+                    onChange={(e) =>
+                      setFormData({ ...formData, fullName: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base-content">
+                    Email
+                  </span>
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type="email"
+                    className="input input-bordered w-full pl-10"
+                    placeholder="you@example.com"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+
+              {/* Password */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base-content">
+                    Password
+                  </span>
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Lock className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="input input-bordered w-full pl-10 pr-10"
+                    placeholder="••••••••"
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="size-5 text-base-content/40" />
+                    ) : (
+                      <Eye className="size-5 text-base-content/40" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="btn btn-primary w-full"
+                disabled={isSigningUp}
+              >
+                {isSigningUp ? (
+                  <>
+                    <Loader2 className="size-5 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  "Create Account"
+                )}
+              </button>
+            </form>
+
+            {/* footer link */}
+            <div className="text-center">
+              <p className="text-sm text-base-content/60">
+                Already have an account?{" "}
+                <Link to="/login" className="link link-primary">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT – illustration */}
+        <div className="flex items-center justify-center">
           <AuthImagePattern
             title="Join our community"
             subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
           />
         </div>
-      </div>
+      </main>
     </div>
   );
 };
