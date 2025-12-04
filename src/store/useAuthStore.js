@@ -44,6 +44,11 @@ export const useAuthStore = create((set, get) => {
     isLoggingIn: false,
     isUpdatingProfile: false,
     isCheckingAuth: true,
+
+    // 🔹 NEW FLAGS
+    isSendingResetEmail: false,
+    isResettingPassword: false,
+
     socket: null,
     onlineUsers: [],
 
@@ -221,7 +226,11 @@ export const useAuthStore = create((set, get) => {
      *  ===================== */
     logout: async () => {
       try {
-        await axiosInstance.post("/auth/logout", {}, { withCredentials: true });
+        await axiosInstance.post(
+          "/auth/logout",
+          {},
+          { withCredentials: true }
+        );
       } catch (e) {
         console.log("[auth] /auth/logout failed (ignoring):", e?.message);
       }
@@ -255,6 +264,50 @@ export const useAuthStore = create((set, get) => {
         toast.error(get().handleError(e));
       } finally {
         set({ isUpdatingProfile: false });
+      }
+    },
+
+    /** =====================
+     *  FORGOT PASSWORD
+     *  ===================== */
+    sendResetEmail: async (email) => {
+      set({ isSendingResetEmail: true });
+      try {
+        const res = await axiosInstance.post("/auth/forgot-password", { email });
+
+        const msg =
+          res.data?.message ||
+          "If that email exists, a reset link was sent.";
+        toast.success(msg);
+        return true;
+      } catch (e) {
+        toast.error(get().handleError(e));
+        return false;
+      } finally {
+        set({ isSendingResetEmail: false });
+      }
+    },
+
+    /** =====================
+     *   RESET PASSWORD
+     *  ===================== */
+    resetPassword: async (token, password) => {
+      set({ isResettingPassword: true });
+      try {
+        const res = await axiosInstance.post(
+          `/auth/reset-password/${token}`,
+          { password }
+        );
+
+        const msg =
+          res.data?.message || "Password reset successfully. You can log in now.";
+        toast.success(msg);
+        return true;
+      } catch (e) {
+        toast.error(get().handleError(e));
+        return false;
+      } finally {
+        set({ isResettingPassword: false });
       }
     },
 
