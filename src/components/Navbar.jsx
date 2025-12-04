@@ -14,28 +14,28 @@ const Navbar = () => {
       "
     >
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Branding */}
-        <Link
-          to="/"
-          className="flex items-center gap-3 hover:opacity-90 transition"
-        >
-          <div className="size-9 rounded-xl bg-primary/10 flex items-center justify-center">
+        
+        {/* BRANDING */}
+        <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition">
+          {/* Icon Tile */}
+          <div className="size-10 rounded-2xl bg-primary/10 flex items-center justify-center">
             <MessageSquare className="w-5 h-5 text-primary" />
           </div>
 
-          {/* Text block (logo) */}
+          {/* Logo Text */}
           <div className="flex flex-col leading-tight">
-            <h1 className="text-sm sm:text-base font-bold tracking-tight">
+            <span className="text-xl font-extrabold text-base-content">
               Chintu
-            </h1>
-            <span className="text-[11px] text-base-content/60 uppercase tracking-wider">
+            </span>
+            <span className="text-[12px] font-semibold uppercase tracking-wide text-base-content/80">
               by TEJU
             </span>
           </div>
         </Link>
 
-        {/* Right Side */}
+        {/* RIGHT SIDE BUTTONS */}
         <div className="flex items-center gap-2 sm:gap-3">
+          
           {/* Settings */}
           <Link
             to="/settings"
