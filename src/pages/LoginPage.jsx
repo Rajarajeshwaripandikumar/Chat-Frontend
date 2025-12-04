@@ -18,21 +18,13 @@ const LoginPage = () => {
     e.preventDefault();
     if (isLoggingIn) return;
 
-    const payload = {
-      email: formData.email.trim(),
-      password: formData.password,
-    };
-
+    const payload = { email: formData.email.trim(), password: formData.password };
     const result = await login(payload);
-    if (result && result.ok) {
-      // go to home (fixed-height chat shell)
-      navigate("/");
-    }
+    if (result && result.ok) navigate("/chat");
   };
 
   return (
-    // 👇 key change: h-full instead of min-h-screen
-    <div className="h-full grid lg:grid-cols-2 bg-base-100">
+    <div className="min-h-screen grid lg:grid-cols-2 bg-base-100">
       {/* Left Side - Form */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
@@ -53,18 +45,14 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
             <div>
-              <label className="text-sm font-medium text-base-content">
-                Email
-              </label>
+              <label className="text-sm font-medium text-base-content">Email</label>
               <div className="relative mt-1">
                 <Mail className="absolute left-3 top-3 h-5 w-5 text-base-content/40" />
                 <input
                   type="email"
                   required
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="you@example.com"
                   className="input input-bordered w-full pl-11 h-11"
                 />
@@ -73,18 +61,14 @@ const LoginPage = () => {
 
             {/* Password */}
             <div>
-              <label className="text-sm font-medium text-base-content">
-                Password
-              </label>
+              <label className="text-sm font-medium text-base-content">Password</label>
               <div className="relative mt-1">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-base-content/40" />
                 <input
                   type={showPassword ? "text" : "password"}
                   required
                   value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   placeholder="••••••••"
                   className="input input-bordered w-full pl-11 pr-11 h-11"
                 />
@@ -93,11 +77,7 @@ const LoginPage = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-3 text-base-content/40 hover:text-base-content/70"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
             </div>
@@ -128,7 +108,7 @@ const LoginPage = () => {
         </div>
       </div>
 
-      {/* Right Side */}
+      {/* Right Side - respects theme via its own component */}
       <AuthImagePattern
         title="Welcome back!"
         subtitle="Sign in to continue your conversations and catch up with your messages."
