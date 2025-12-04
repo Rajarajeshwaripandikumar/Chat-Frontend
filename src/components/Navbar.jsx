@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="size-9 rounded-xl bg-primary/10 flex items-center justify-center">
             <MessageSquare className="w-5 h-5 text-primary" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight">Chintu</h1>
+          <h1 className="text-xl font-bold tracking-tight">Chintu by TEJU</h1>
         </Link>
 
         {/* Right Side */}
