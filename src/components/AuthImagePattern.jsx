@@ -1,13 +1,12 @@
 // src/components/AuthImagePattern.jsx
 const AuthImagePattern = ({ title, subtitle }) => {
   return (
-    <div className="hidden lg:flex items-center justify-center bg-base-200 p-12 relative overflow-hidden">
-      {/* subtle background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.25),transparent_55%),radial-gradient(circle_at_bottom,_rgba(251,191,36,0.2),transparent_55%)] opacity-70" />
-
+    <div className="hidden lg:flex items-center justify-center bg-white p-12 relative">
+      
       <div className="relative max-w-md w-full">
         {/* mini chat window */}
-        <div className="bg-base-100/95 border border-base-300 rounded-3xl shadow-2xl shadow-base-300/40 backdrop-blur mb-8 overflow-hidden">
+        <div className="bg-white border border-base-300 rounded-3xl shadow-2xl shadow-base-300/40 mb-8 overflow-hidden">
+          
           {/* header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-base-300/60">
             <div className="flex items-center gap-3">
@@ -24,6 +23,7 @@ const AuthImagePattern = ({ title, subtitle }) => {
                 </p>
               </div>
             </div>
+
             <div className="flex gap-1">
               <span className="w-2 h-2 rounded-full bg-error/70" />
               <span className="w-2 h-2 rounded-full bg-warning/70" />
@@ -74,12 +74,8 @@ const AuthImagePattern = ({ title, subtitle }) => {
 
         {/* copy */}
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-base-content mb-2">
-            {title}
-          </h2>
-          <p className="text-base-content/60 text-sm leading-relaxed">
-            {subtitle}
-          </p>
+          <h2 className="text-3xl font-bold text-base-content mb-2">{title}</h2>
+          <p className="text-base-content/60 text-sm leading-relaxed">{subtitle}</p>
         </div>
       </div>
     </div>
