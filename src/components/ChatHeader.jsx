@@ -9,7 +9,7 @@ const ChatHeader = () => {
   const isOnline = onlineUsers.includes(selectedUser._id);
 
   return (
-    <div className="px-4 py-3 border-b border-base-300 bg-base-100">
+    <div className="px-4 py-3 border-b border-base-300 bg-base-100 flex-shrink-0 sticky top-0 z-10">
       <div className="flex items-center justify-between gap-3">
         {/* Left: avatar + name + status */}
         <div className="flex items-center gap-3">
