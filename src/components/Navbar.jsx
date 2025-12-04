@@ -17,6 +17,7 @@ const Navbar = () => {
         
         {/* BRANDING */}
         <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition">
+          
           {/* Icon Tile */}
           <div className="size-10 rounded-2xl bg-primary/10 flex items-center justify-center">
             <MessageSquare className="w-5 h-5 text-primary" />
@@ -27,7 +28,7 @@ const Navbar = () => {
             <span className="text-xl font-extrabold text-base-content">
               Chintu
             </span>
-            <span className="text-[12px] font-semibold uppercase tracking-wide text-base-content/80">
+            <span className="text-[12px] font-semibold tracking-wide text-base-content/80">
               by TEJU
             </span>
           </div>
@@ -36,7 +37,6 @@ const Navbar = () => {
         {/* RIGHT SIDE BUTTONS */}
         <div className="flex items-center gap-2 sm:gap-3">
           
-          {/* Settings */}
           <Link
             to="/settings"
             className="btn btn-sm btn-ghost gap-2 shadow-sm border border-base-300 hover:bg-base-200"
@@ -45,10 +45,8 @@ const Navbar = () => {
             <span className="hidden sm:inline">Settings</span>
           </Link>
 
-          {/* Authenticated Options */}
           {authUser && (
             <>
-              {/* Profile */}
               <Link
                 to="/profile"
                 className="btn btn-sm btn-ghost gap-2 shadow-sm border border-base-300 hover:bg-base-200"
@@ -57,7 +55,6 @@ const Navbar = () => {
                 <span className="hidden sm:inline">Profile</span>
               </Link>
 
-              {/* Logout */}
               <button
                 onClick={logout}
                 className="
@@ -71,6 +68,7 @@ const Navbar = () => {
             </>
           )}
         </div>
+
       </div>
     </header>
   );
