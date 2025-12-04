@@ -27,7 +27,7 @@ const App = () => {
   // Loader while checking auth
   if (isCheckingAuth) {
     return (
-      <div data-theme={theme} className="h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center h-screen">
         <Loader className="size-10 animate-spin" />
       </div>
     );
@@ -39,15 +39,12 @@ const App = () => {
   };
 
   return (
-    <div
-      data-theme={theme}
-      className="h-screen overflow-hidden bg-base-200"
-    >
+    <div data-theme={theme}>
       {/* FIXED NAVBAR */}
       <Navbar />
 
-      {/* AREA UNDER NAVBAR = full height, no window scroll */}
-      <main className="pt-16 h-full overflow-hidden px-4 md:px-0">
+      {/* ADD SPACING BELOW NAVBAR */}
+      <main className="pt-20 px-4 md:px-0 min-h-screen">
         <Routes>
           {/* Home */}
           <Route
@@ -65,7 +62,7 @@ const App = () => {
             element={!authUser ? <LoginPage /> : <Navigate to="/" />}
           />
 
-          {/* Settings */}
+          {/* Settings (public or private based on your preference) */}
           <Route path="/settings" element={<SettingsPage />} />
 
           {/* Private */}
