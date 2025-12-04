@@ -21,8 +21,9 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 bg-base-200">
-      <div className="max-w-2xl mx-auto px-4 py-8">
+    // 🔑 use h-full, not min-h-screen, and no pt-20
+    <div className="h-full bg-base-200 flex justify-center md:items-center">
+      <div className="w-full max-w-2xl mx-auto px-4 py-6 md:py-8">
         <div className="bg-base-100 border border-base-300 rounded-2xl p-6 sm:p-8 space-y-8 shadow-sm">
           {/* Header */}
           <div className="text-center space-y-1">
