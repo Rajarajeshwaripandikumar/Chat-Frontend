@@ -19,7 +19,6 @@ const ChatContainer = () => {
 
   const { authUser } = useAuthStore();
 
-  // single anchor at the very bottom
   const messageEndRef = useRef(null);
 
   // load messages when user changes
@@ -42,16 +41,21 @@ const ChatContainer = () => {
 
   if (isMessagesLoading) {
     return (
-      <div className="flex-1 flex flex-col overflow-auto bg-base-100">
+      <div className="flex-1 flex flex-col min-h-0 bg-base-100">
         <ChatHeader />
-        <MessageSkeleton />
+
+        {/* scroll only here */}
+        <div className="flex-1 overflow-y-auto">
+          <MessageSkeleton />
+        </div>
+
         <MessageInput />
       </div>
     );
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-auto bg-base-100">
+    <div className="flex-1 flex flex-col min-h-0 bg-base-100">
       <ChatHeader />
 
       {/* Messages */}
@@ -91,7 +95,6 @@ const ChatContainer = () => {
                   src={message.image}
                   alt="Attachment"
                   className="sm:max-w-[200px] rounded-md mb-2"
-                  // if image loads later, make sure we’re still at bottom
                   onLoad={() => {
                     if (messageEndRef.current) {
                       messageEndRef.current.scrollIntoView({
@@ -107,7 +110,7 @@ const ChatContainer = () => {
           </div>
         ))}
 
-        {/* 👇 invisible anchor at the very bottom */}
+        {/* invisible anchor at the very bottom */}
         <div ref={messageEndRef} />
       </div>
 
