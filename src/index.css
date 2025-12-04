@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ----------------------------------------
+   FLOAT ANIMATIONS (for orbiting chat nodes)
+-----------------------------------------*/
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+/* ----------------------------------------
+   SWEEP / LIGHT-PASS ANIMATION (if used)
+-----------------------------------------*/
+@keyframes sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ----------------------------------------
+   TYPING INDICATOR DOTS
+-----------------------------------------*/
+@keyframes typing-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  40% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+.dot-animate {
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+.dot-animate.delay-150 {
+  animation-delay: 0.15s;
+}
+
+.dot-animate.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* ----------------------------------------
+   ORBIT-ROTATION (optional future use)
+-----------------------------------------*/
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+}
