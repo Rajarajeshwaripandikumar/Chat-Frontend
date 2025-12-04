@@ -4,8 +4,8 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
-import ForgotPasswordPage from "./pages/ForgotPassword";
-import ResetPasswordPage from "./pages/ResetPassword";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
@@ -29,7 +29,10 @@ const App = () => {
   // Loader while checking auth
   if (isCheckingAuth) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div
+        data-theme={theme}
+        className="h-screen flex items-center justify-center bg-base-200"
+      >
         <Loader className="size-10 animate-spin" />
       </div>
     );
@@ -41,12 +44,15 @@ const App = () => {
   };
 
   return (
-    <div data-theme={theme}>
+    <div
+      data-theme={theme}
+      className="h-screen overflow-hidden bg-base-200"
+    >
       {/* FIXED NAVBAR */}
       <Navbar />
 
-      {/* ADD SPACING BELOW NAVBAR */}
-      <main className="pt-20 px-4 md:px-0 min-h-screen">
+      {/* AREA BELOW NAVBAR – full-height, no window scroll */}
+      <main className="pt-16 h-full overflow-hidden px-4 md:px-0">
         <Routes>
           {/* Home */}
           <Route
@@ -64,10 +70,18 @@ const App = () => {
             element={!authUser ? <LoginPage /> : <Navigate to="/" />}
           />
 
-          {/* Settings (public or private based on your preference) */}
+          {/* Forgot / Reset Password */}
+          <Route
+            path="/forgot-password"
+            element={!authUser ? <ForgotPasswordPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/reset-password/:token"
+            element={!authUser ? <ResetPasswordPage /> : <Navigate to="/" />}
+          />
+
+          {/* Settings */}
           <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
 
           {/* Private */}
           <Route
