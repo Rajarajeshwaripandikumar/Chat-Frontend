@@ -21,7 +21,7 @@ const ChatContainer = () => {
 
   const messageEndRef = useRef(null);
 
-  // Load messages when user changes
+  // load messages when user changes
   useEffect(() => {
     if (!selectedUser?._id) return;
     getMessages(selectedUser._id);
@@ -29,7 +29,7 @@ const ChatContainer = () => {
     return () => unsubscribeFromMessages();
   }, [selectedUser?._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
-  // Scroll to bottom whenever messages change
+  // scroll to bottom whenever messages change
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({
@@ -39,13 +39,13 @@ const ChatContainer = () => {
     }
   }, [messages.length, selectedUser?._id]);
 
-  /* -------------------------------- LOADING -------------------------------- */
   if (isMessagesLoading) {
     return (
-      <div className="flex-1 flex flex-col min-h-0 bg-base-100">
+      <div className="flex-1 flex flex-col min-h-0 bg-base-100 overflow-hidden">
         <ChatHeader />
 
-        <div className="flex-1 overflow-y-auto">
+        {/* scroll only here */}
+        <div className="flex-1 min-h-0 overflow-y-auto">
           <MessageSkeleton />
         </div>
 
@@ -54,13 +54,12 @@ const ChatContainer = () => {
     );
   }
 
-  /* ---------------------------------- CHAT --------------------------------- */
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-base-100">
+    <div className="flex-1 flex flex-col min-h-0 bg-base-100 overflow-hidden">
       <ChatHeader />
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
+      <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
         {messages.map((message) => (
           <div
             key={message._id}
@@ -112,7 +111,7 @@ const ChatContainer = () => {
           </div>
         ))}
 
-        {/* Invisible anchor to auto-scroll */}
+        {/* invisible anchor at the very bottom */}
         <div ref={messageEndRef} />
       </div>
 
