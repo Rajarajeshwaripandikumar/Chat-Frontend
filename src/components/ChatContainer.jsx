@@ -39,9 +39,10 @@ const ChatContainer = () => {
     }
   }, [messages.length, selectedUser?._id]);
 
+  /* --------------------------- LOADING SKELETON --------------------------- */
   if (isMessagesLoading) {
     return (
-      <div className="flex-1 flex flex-col min-h-0 bg-base-100 overflow-hidden">
+      <div className="flex-1 flex flex-col min-h-0 bg-base-100">
         <ChatHeader />
 
         {/* scroll only here */}
@@ -54,8 +55,9 @@ const ChatContainer = () => {
     );
   }
 
+  /* --------------------------------- CHAT --------------------------------- */
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-base-100 overflow-hidden">
+    <div className="flex-1 flex flex-col min-h-0 bg-base-100">
       <ChatHeader />
 
       {/* Messages */}
@@ -106,7 +108,11 @@ const ChatContainer = () => {
                 />
               )}
 
-              {message.text && <p className="text-sm sm:text-base">{message.text}</p>}
+              {message.text && (
+                <p className="text-sm sm:text-base">
+                  {message.text}
+                </p>
+              )}
             </div>
           </div>
         ))}
