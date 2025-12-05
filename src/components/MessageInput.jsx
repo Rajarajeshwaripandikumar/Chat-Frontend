@@ -51,7 +51,11 @@ const MessageInput = () => {
   const canSend = !!text.trim() || !!imagePreview;
 
   return (
-    <div className="w-full px-3 sm:px-5 py-3">
+    <div
+      className="w-full px-3 sm:px-5 pt-2 pb-3 border-t border-base-300 bg-base-100"
+      // extra padding for iOS home bar so send button isn't cut off
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
       {/* Image preview */}
       {imagePreview && (
         <div className="mb-3 flex items-center gap-2">
