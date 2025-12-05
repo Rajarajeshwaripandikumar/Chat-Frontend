@@ -46,13 +46,13 @@ const App = () => {
   return (
     <div
       data-theme={theme}
-      className="h-screen overflow-hidden bg-base-200"
+      className="min-h-screen bg-base-200 overflow-x-hidden"
     >
       {/* FIXED NAVBAR */}
       <Navbar />
 
-      {/* AREA BELOW NAVBAR – full-height, no window scroll */}
-      <main className="pt-16 h-full overflow-hidden px-4 md:px-0">
+      {/* AREA BELOW NAVBAR */}
+      <main className="pt-16">
         <Routes>
           {/* Home */}
           <Route
